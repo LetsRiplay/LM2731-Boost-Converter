@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://dubiouscreations.com/2021/04/06/designing-with-usb-c-lessons-learned/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Designing with USB-C: Lessons Learned | Dubious Creations</title>
+<meta name="generator" content="Jekyll v4.2.2">
+<meta property="og:title" content="Designing with USB-C: Lessons Learned">
+<meta name="author" content="matthew">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="I spent hours reading the USB-C spec so you don’t have to. A guide to designing compliant circuits with USB-C for hobbyists.">
+<meta property="og:description" content="I spent hours reading the USB-C spec so you don’t have to. A guide to designing compliant circuits with USB-C for hobbyists.">
+<link rel="canonical" href="https://dubiouscreations.com/2021/04/06/designing-with-usb-c-lessons-learned/">
+<meta property="og:url" content="https://dubiouscreations.com/2021/04/06/designing-with-usb-c-lessons-learned/">
+<meta property="og:site_name" content="Dubious Creations">
+<meta property="og:image" content="https://dubiouscreations.com/images/resized/wp-content/uploads/2021/04/image-12-1-1024x768-250.jpg">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-04-05T23:10:19+00:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:image" content="https://dubiouscreations.com/images/resized/wp-content/uploads/2021/04/image-12-1-1024x768-250.jpg">
+<meta property="twitter:title" content="Designing with USB-C: Lessons Learned">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"matthew"},"dateModified":"2021-04-05T23:10:19+00:00","datePublished":"2021-04-05T23:10:19+00:00","description":"I spent hours reading the USB-C spec so you don’t have to. A guide to designing compliant circuits with USB-C for hobbyists.","headline":"Designing with USB-C: Lessons Learned","image":"https://dubiouscreations.com/images/resized/wp-content/uploads/2021/04/image-12-1-1024x768-250.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://dubiouscreations.com/2021/04/06/designing-with-usb-c-lessons-learned/"},"url":"https://dubiouscreations.com/2021/04/06/designing-with-usb-c-lessons-learned/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/style.css"><link type="application/atom+xml" rel="alternate" href="https://dubiouscreations.com/feed.xml" title="Dubious Creations">
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="https://dubiouscreations.com/">Dubious Creations</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="https://dubiouscreations.com/about.html">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope="" itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Designing with USB-C: Lessons Learned</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2021-04-05T23:10:19+00:00" itemprop="datePublished">
+        Apr 5, 2021
+      </time>• 
+          <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">matthew</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>I spent hours reading the USB-C spec so you don’t have to. A guide to designing compliant circuits with USB-C for hobbyists.</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-12-1-1024x768.jpg" title="image-12-1-1024x768" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-12-1-1024x768.jpg" width="1024" height="768" srcset="   /images/resized/wp-content/uploads/2021/04/image-12-1-1024x768-518.jpg 518w,   /images/resized/wp-content/uploads/2021/04/image-12-1-1024x768-250.jpg 250w, /images/wp-content/uploads/2021/04/image-12-1-1024x768.jpg 1024w" alt="My first USB-C design!" loading="lazy">
+    </a>
+    <p class="image-caption">My first USB-C design!
+</p>
+</div>
+
+<p><em>Disclosure: JLCPCB sponsors some of my projects, but I would never recommend something that I wouldn’t otherwise. Their SMT Assembly service I believe is unique in the industry, and is great for hobbyists who need high quality assembled prototypes for cheap, without having to deal with logistics of component supply.</em></p>
+
+<p>TLDR: Scroll to the “Putting It All Together” section. Implement that circuit, and use it like a good old Type B port.</p>
+
+<h2 id="introduction-and-history">Introduction and History</h2>
+
+<p>USB is really a miracle connector. I have been designing PCBs for about a decade now (mostly as a hobbyist due to selling out and joining the software world for my career after my EE degree), and of the dozens of boards I’ve designed, I can probably count on one hand all the designs without a USB port.</p>
+
+<p>Why do I put a USB port on virtually all my boards? Because it:</p>
+
+<ul>
+  <li>Supplies power at a convenient voltage.</li>
+  <li>Most of the microcontrollers I use nowadays have either a serial bootloader (ESP32) or built-in USB DFU bootloader (STM32), so it can be used to program the chip.</li>
+  <li>A serial port for debugging (either through a USB-UART chip or enumerating as a CDC-ACM virtual serial port in firmware for STM32).</li>
+</ul>
+
+<p>What more can you ask from an ubiquitous connector that takes up minimal board space, and uses cables you can buy from even grocery stores? If you want to power your project with a wall wart, USB chargers are readily available, too (even from grocery stores).</p>
+
+<p>But wait, it gets even better. Back in 2014, the USB-C standard was finalised, and Google was the first major manufacturer to adopt it with the 2015 Chromebook Pixel, with Apple following shortly after with the 2015 MacBook. Initial adoption was a bit slow, but over the past few years, USB-C has taken over the consumer electronics market, and most laptops and smartphones come with USB-C nowadays. That’s a very good thing, because USB-B had many pain points –</p>
+
+<ul>
+  <li>USB was not designed to supply significant amount of power initially – only 5V @ 500mA. As a result, to support battery charging, manufacturers started adding proprietary extensions for higher current (and sometimes voltage) – Qualcomm’s Quick Charge, Sony had their own thing, Apple had their own thing, and Samsung had their own thing. None of them were inter-operable, making designing a “universal” power sink very challenging. Eventually USB-IF (the governing body of USB) came up with the Battery Charging Specification (BCS), but it was a bit too late, and it’s also unnecessarily complicated due to having to make do with the existing data pins. It must not break existing devices that don’t understand BCS, and in designs where we need both high current and data transfer, having to multiplex BCS detection circuitry with data lines is always a pain. It’s also limited to only 5V@1.5A, because A-B cables don’t have any identification mechanism, and burning down a user’s house trying to push 5A through a cable designed for 1.5A is frowned upon.</li>
+  <li>Different connectors for USB 1.1/2.0 and 3.0.</li>
+  <li>Different connectors for host vs device. The initial design calls for USB-A ports on hosts, USB-B ports on devices, with a few size variations for both (mini and micro – they are electrically identical to full fat versions… more or less). It made sense – if all hosts have Type A ports, all devices have Type B ports, and we only make A-B cables, everything works as long as they fit! … Well, until we realised that we want some things to be devices some of the time, and hosts some of the time – phones and tablets. They need to be device when charging or plugged into a computer, but host when we want them to read a USB flash drive or use a USB keyboard to write a long blog post. So like BCS, we bolted it on with the USB OTG abomination, which also left a lot to be desired.</li>
+  <li><a href="https://www.reddit.com/r/ProgrammerHumor/comments/226qum/usb_superposition/">USB superposition</a>.</li>
+</ul>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-1.png" title="image-1" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-1.png" width="478" height="480" srcset="   /images/resized/wp-content/uploads/2021/04/image-1-250.png 250w, /images/wp-content/uploads/2021/04/image-1.png 478w" alt="USB Superposition" loading="lazy">
+    </a>
+    <p class="image-caption">USB Superposition
+</p>
+</div>
+
+<p>USB-C solved all those problems from the ground up:</p>
+
+<ul>
+  <li>We can now get up to 5V@3A with a very simple detection mechanism that just requires 2 ADC pins, or 1 if we add a bit of additional hardware. No complicated multiplexing needed because they are not on data pins. If we want higher voltage/current, we can get up to 20V@5A with the new Type C Power Delivery standard though that is more complicated. Best of all, this is all standardised. Nothing is proprietary, and all USB-C devices support these (ok, maybe that’s optimistic… let’s just say all devices from reputable manufacturers do).</li>
+  <li>One connector rules them all – USB 1.1/2.0, 3.0/3.1/3.2, 4.0, even DP, HDMI, audio, and a few other things.</li>
+  <li>One cable rules them all – C to C is all we need (ok that’s a lie, we actually have two types of cables, one basic type for up to USB 2.0 @ 3A, and a fancier type that self-identifies their capabilities). Roles are determined electrically, not using connectors.</li>
+  <li>No more superposition!!</li>
+</ul>
+
+<p>Despite being a big fan of Type C from the early days, I have only just designed my first PCB with USB-C, in 2021, feeling like a hypocrite this whole time buying only USB-C devices, and still making micro-B ones!</p>
+
+<p>Why? Mostly because Type-C connectors tend to be much harder to solder (much more pins, about the same total connector size). The standard is also much more complicated, though as we will see shortly, actual implementation is VERY simple if we just want to use it to replace micro-B in USB 2.0 devices (as opposed to hosts).</p>
+
+<p>What changed? Well, JLCPCB started offering Type C connectors with their SMT assembly service, so I have no excuse now!</p>
+
+<p>I did a lot of reading up on Type C for my first project, both official and unofficial sources, and I thought I would write a post summarising all I have learned and de-mystify it a bit, and hopefully encourage other hobbyists/makers to adopt USB-C.</p>
+
+<h2 id="scope">Scope</h2>
+
+<p>Type C is a very big standard. The “bible” – <a href="https://www.usb.org/sites/default/files/USB%20Type-C%20Spec%20R2.0%20-%20August%202019.pdf">Universal Serial Bus Type-C Cable and Connector Specification</a>, is 373 pages long. They clearly learned from their mistake before, and decided to include EVERYTHING that anyone can conceivably need into the standard. But for basic applications, you don’t actually need to know all those things. You should (if I do my job) be able to use Type-C as a micro-B replacement in a standard-compliant way by just reading this post.</p>
+
+<p>I’ll limit the discussion in this post to designing Type-C pure devices (called upstream-facing port or UFP in the spec), pure power sinks (USB-C actually allows devices to negotiate switching power supply direction without switching data host/device!), and communicate at up to USB 2.0 HighSpeed. This I think encompasses most hobbyist applications.</p>
+
+<p>Let’s get started.</p>
+
+<h2 id="connectors">Connectors</h2>
+
+<p>This is the connector pinout from Wikipedia:</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-2.png" title="image-2" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-2.png" width="955" height="385" srcset="   /images/resized/wp-content/uploads/2021/04/image-2-518.png 518w,   /images/resized/wp-content/uploads/2021/04/image-2-250.png 250w, /images/wp-content/uploads/2021/04/image-2.png 955w" alt="USB-C Connector Pinout (By Chindi.ap, CC BY-SA 4.0, Wikipedia)" loading="lazy">
+    </a>
+    <p class="image-caption">USB-C Connector Pinout (By Chindi.ap, CC BY-SA 4.0, Wikipedia)
+</p>
+</div>
+
+<p>It looks quite daunting, but we actually don’t care about most of those pins for our application:</p>
+
+<ul>
+  <li>TXn+, TXn-, RXn+, RXn- pins are for USB 3 SuperSpeed, so we can ignore them.</li>
+  <li>SBU1/2 pins are for side band use (used for low speed communication when the port is used for something like DP or HDMI), so we can also ignore them.</li>
+</ul>
+
+<p>That leaves us with these pins –</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-3.png" title="image-3" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-3.png" width="953" height="383" srcset="   /images/resized/wp-content/uploads/2021/04/image-3-518.png 518w,   /images/resized/wp-content/uploads/2021/04/image-3-250.png 250w, /images/wp-content/uploads/2021/04/image-3.png 953w" alt="Simplified USB-C Connector Pinout" loading="lazy">
+    </a>
+    <p class="image-caption">Simplified USB-C Connector Pinout
+</p>
+</div>
+
+<p>Much more manageable. Most of them are pins we already know and love – VBUS, D+, D-, GND. Except they are all doubled/quadrupled now to support reversible insertion. They can (and should) all be shorted together.</p>
+
+<p>The only new pins are CC1 and CC2 (channel configuration), and they do a few things:</p>
+
+<ul>
+  <li>Pull down resistors on the device side tells the host that a connection has been made with a device, and VBUS should be turned on. Unlike Type A, in Type C VBUS is never energised until a host knows a device is there, because the user may plug two hosts into each other, and terrible things would happen if they are permanently live.</li>
+  <li>On the device side, one of them will read as ground, and the other some higher voltage. This tells us the cable orientation. It’s important for 3.0/SuperSpeed operations, but we don’t actually care about orientation for 2.0, since we are shorting all the other pins together! I will refer to the non-ground one as CC from now on, though it can be physically on either CC1 or CC2 depending on orientation (and we must account for both possibilities, otherwise our device will only work with cable inserted one way). No, we cannot short them.</li>
+  <li>The CC voltage is used to determine how much current is available from the upstream port, and whether there is a connection. This voltage is determined by a voltage divider between host and device.</li>
+  <li>If we want to do Power Delivery (we need more than 5V@3A), the communication also happens on the CC pin, but it’s much more involved and we probably want to use a PD sink controller to handle that for us (eg. ST <a href="https://www.st.com/en/interfaces-and-transceivers/stusb4500.html">STUSB4500</a>).</li>
+</ul>
+
+<p>The standard requires that CC1 and CC2 be pulled down to ground on the device side with a 5.1k ±10% Ω resistor each (Table 4-25 in the spec), and with a basic C-C cable, only one will be connected to the host, which will have different valued pull-up resistors to indicate how much current it can supply – 56kΩ, 22kΩ, or 10kΩ to 5V, or an equivalent current source, or equivalent pull-ups to 3.3V (Table 4-24).</p>
+
+<p>So in the end, the whole circuit looks like this:</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-4.png" title="image-4" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-4.png" width="740" height="307" srcset="   /images/resized/wp-content/uploads/2021/04/image-4-518.png 518w,   /images/resized/wp-content/uploads/2021/04/image-4-250.png 250w, /images/wp-content/uploads/2021/04/image-4.png 740w" alt="Connectors + cables circuit (Silicon Labs)" loading="lazy">
+    </a>
+    <p class="image-caption">Connectors + cables circuit (Silicon Labs)
+</p>
+</div>
+
+<p>In a basic USB 2.0 3A cable, Ra doesn’t exist, but fancy cables that support higher speeds or higher currents will have them to power electronics in the cable so they can tell the host their capabilities. On the device side we don’t care about that, but that’s the reason why we can’t short the CC pins and just use one resistor. Raspberry Pi Foundation did that with early revisions of the Raspberry Pi 4, and it <a href="https://hackaday.com/2019/07/16/exploring-the-raspberry-pi-4-usb-c-issue-in-depth/">didn’t end well for them</a>. Don’t be like them.</p>
+
+<p>In terms of determining how much current you can draw, just read the CC voltage (remember that it’s the higher of CC1 and CC2). Thresholds are as follows:</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-5-450x158.png" title="image-5-450x158" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-5-450x158.png" width="450" height="158" srcset="   /images/resized/wp-content/uploads/2021/04/image-5-450x158-250.png 250w, /images/wp-content/uploads/2021/04/image-5-450x158.png 450w" alt="Table 4-36: Current advertisement" loading="lazy">
+    </a>
+    <p class="image-caption">Table 4-36: Current advertisement
+</p>
+</div>
+
+<p>So what that means is:</p>
+
+<ul>
+  <li>[0V – 0.2V]: No connection (we only care about this if the device is self-powered, because in a bus-powered device, the fact that we have power and the firmware is running means there is a connection)</li>
+  <li>[0.2V – 0.66V]: Standard USB current available (the host either has no high current capability, or we are connected to a legacy host with a A-C cable – see “How Much Current Can I Draw?” for more details)</li>
+  <li>[0.66V – 1.23V]: 1.5A available</li>
+  <li>[1.23V+]: 3.0A available</li>
+</ul>
+
+<p>In practice, most laptops will supply 1.5A or 3.0A, most wall warts will supply 3.0A, and phones (if we use them as host) will support standard USB. The CC voltage may change over time and should be continually monitored. When it changes, the device has 60ms to be compliant with the new advertised current limit (tSinkAdj, Table 4-29).</p>
+
+<p>If we are using a USB-A power supply with an A-C cable, it will always show vRd-USB because the pull-ups are actually inside the cable, since a USB-A host knows nothing about CC signals, and a compliant A-C cable can’t assume the host can supply more. There ARE non-compliant cables that do advertise high current support to device without checking with host. <a href="https://www.extremetech.com/computing/217556-google-engineer-challenges-usb-c-cables-for-sale-at-amazon">They are a fire risk and should never be used</a>. Fortunately they are less common now in 2021. So if we want to draw more current from a legacy power supply, we have to go back to the pre-Type-C madness on data lines.</p>
+
+<h2 id="putting-it-all-together-aka-tldr">Putting It All Together (aka TLDR)</h2>
+
+<p>With that, we arrive at the schematics for using a Type C port as a micro-B replacement –</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-6-450x312.png" title="image-6-450x312" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-6-450x312.png" width="450" height="312" srcset="   /images/resized/wp-content/uploads/2021/04/image-6-450x312-250.png 250w, /images/wp-content/uploads/2021/04/image-6-450x312.png 450w" alt="Simple Type C schematic" loading="lazy">
+    </a>
+    <p class="image-caption">Simple Type C schematic
+</p>
+</div>
+
+<p>Vbus, D+, D-, and Gnd are used just like in legacy connectors.</p>
+
+<p>CC1 and CC2 must have a 5.1kΩ pull-down each. If you want to take advantage of the new Type C current advertisement mechanism, they should be routed to ADC pins on your microcontroller, but if you don’t need that, leaving them alone with just the pull-downs is perfectly fine, too, and it will act just like a standard Type B port electrically.</p>
+
+<p>Note that I am using a connector with only the USB 2.0 pins. If you are using a fully-featured connector, all other pins can be left unconnected.</p>
+
+<h2 id="choosing-a-connector">Choosing a Connector</h2>
+
+<p>Now that we have decided to add USB-C to our project, we need to pick a connector to use. It’s not easy – there is a huge variety on the market, and some are much harder to use than others. Generally, they are one of these four types.</p>
+
+<h3 id="full-featured-all-smt">Full Featured All SMT</h3>
+
+<p>First type is a fully featured connector with two rows of SMT pads. They are probably the most difficult to use for hobbyists, because there is no way to inspect/fix the inner pads, and at ~0.3mm pitch, those pads are very close together, and may short if your reflow process isn’t absolutely perfect.</p>
+
+<p>If you are getting your boards professionally assembled, this may be ok, but there’s no need to risk it if you don’t need USB 3.0 SuperSpeed.</p>
+
+<p>Here is <a href="https://datasheet.lcsc.com/szlcsc/1811131825_Korean-Hroparts-Elec-TYPE-C-31-M-05_C106817.pdf">one example</a>: Korean Hroparts TYPE-C-31-M-05.</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-7-450x206.png" title="image-7-450x206" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-7-450x206.png" width="450" height="206" srcset="   /images/resized/wp-content/uploads/2021/04/image-7-450x206-250.png 250w, /images/wp-content/uploads/2021/04/image-7-450x206.png 450w" alt="Full featured connector" loading="lazy">
+    </a>
+    <p class="image-caption">Full featured connector
+</p>
+</div>
+
+<h3 id="full-featured-12-smt-12-th">Full Featured 1/2 SMT 1/2 TH</h3>
+
+<p>And then we have connectors where the back row uses through-hole pins instead of pads. They are probably easier, but the pins are very close together, and it seems like a huge hassle.</p>
+
+<p>Example: JAE <a href="https://www.mouser.co.uk/datasheet/2/206/DX07S024XA8R700-1920422.pdf">DX07S024XA8R700</a>.</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-8-390x450.png" title="image-8-390x450" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-8-390x450.png" width="390" height="450" srcset="   /images/resized/wp-content/uploads/2021/04/image-8-390x450-250.png 250w, /images/wp-content/uploads/2021/04/image-8-390x450.png 390w" alt="JAE DX07S024XA8R700" loading="lazy">
+    </a>
+    <p class="image-caption">JAE DX07S024XA8R700
+</p>
+</div>
+
+<h3 id="usb-20-only-smt">USB 2.0-Only SMT</h3>
+
+<p>And then we have connectors that omit all the pins not required for USB 2.0, and we end up with a connector with just one row of SMD pads, with reasonable spacing. This option I believe works the best for our applications, and my chosen connector is the Korean Hroparts <a href="https://datasheet.lcsc.com/szlcsc/1811131825_Korean-Hroparts-Elec-TYPE-C-31-M-12_C165948.pdf">TYPE-C-31-M-12</a> (LCSC part number <a href="https://lcsc.com/product-detail/USB-Connectors_Korean-Hroparts-Elec-TYPE-C-31-M-12_C165948.html/?href=jlc-SMT">C165948</a>).</p>
+
+<p>JLC has a lot of them in stock as of this writing, and offers them for $0.307 at qty 1, and a few cents to solder them for us.</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-10.png" title="image-10" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-10.png" width="501" height="405" srcset="   /images/resized/wp-content/uploads/2021/04/image-10-250.png 250w, /images/wp-content/uploads/2021/04/image-10.png 501w" alt="Korean Hroparts TYPE-C-31-M-12" loading="lazy">
+    </a>
+    <p class="image-caption">Korean Hroparts TYPE-C-31-M-12
+</p>
+</div>
+
+<p>It has worked very well for me so far – perfect assembly quality from JLC, using KiCad’s built-in footprint for this connector.</p>
+
+<p>I have never had to solder it myself, but because the pins actually extend past the housing (unlike many micro-B connectors), I feel this is probably pretty easy to hand-solder, too, if you are used to soldering QFPs.</p>
+
+<h3 id="power-only-smt">Power-Only SMT</h3>
+
+<p>If we don’t need data transfer at all, there are even simpler connectors that only have power and the CC pins (so we can determine how much current we can draw). I have not tried them.</p>
+
+<p>Example: Korean Hroparts <a href="https://datasheet.lcsc.com/szlcsc/1811101526_Korean-Hroparts-Elec-TYPE-C-31-M-17_C283540.pdf">TYPE-C-31-M-17</a>. It’s $0.191 from JLC, so you save about 11 cents.</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-11-450x184.png" title="image-11-450x184" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-11-450x184.png" width="450" height="184" srcset="   /images/resized/wp-content/uploads/2021/04/image-11-450x184-250.png 250w, /images/wp-content/uploads/2021/04/image-11-450x184.png 450w" alt="Korean Hroparts TYPE-C-31-M-17" loading="lazy">
+    </a>
+    <p class="image-caption">Korean Hroparts TYPE-C-31-M-17
+</p>
+</div>
+
+<h2 id="how-much-current-can-i-draw">How Much Current Can I Draw?</h2>
+
+<h3 id="continuous">Continuous</h3>
+
+<p>If you have a USB-C power supply, just read the CC voltage, and refer to Table 4-36 copied above. If you want to support legacy power supplies as well with A-C cables, you also have to implement detection based on Battery Charging Specification 1.2.</p>
+
+<p>Maxim has a guide on how to do that: <a href="https://pdfserv.maximintegrated.com/en/an/TUT5801.pdf">https://pdfserv.maximintegrated.com/en/an/TUT5801.pdf</a></p>
+
+<p>But it basically boils down to this (as I understand it) – there are 3 types of ports. Standard Downstream Port (SDP) which is data only with no high current capacity, a Charging Downstream Port (CDP) which is data + 1.5A, and a Dedicated Charging Port (DCP) which is 1.5A with no data.</p>
+
+<p>One possible detection algorithm is to apply 3.3V to D+, and read D-. If it’s 3.3V, we have either CDP or DCP (otherwise SDP). Then we do the same, but reversed (apply voltage to D- and read D+). If D+ reads 3.3V, we have a bi-directional short between D+ and D-, which means we have a DCP. Otherwise it’s a CDP.</p>
+
+<p>And remember that you have to multiplex it with data, if you also want to do data transfer.</p>
+
+<p>If you want to support proprietary implementations, that’s a whole nother can of worms. Both Apple and Sony use resistive dividers on data lines that can be read with an ADC. Quick Charge I believe requires a dedicated controller.</p>
+
+<p>Without either CC showing 1.5A/3A or BCS showing CDP or DCP, we have standard USB current, and that’s a lot more complicated. In this case you are allowed to draw 500mA only if your device cannot enumerate. If your device does enumerate, it must draw maximum of 100mA until negotiated otherwise with the host as part of the enumeration process (up to 500mA).</p>
+
+<h3 id="startup-current">Startup Current</h3>
+
+<p>So either Type C current advertisement or BCS tells us the maximum continuous current, but what about peak current at plug-in, when all the capacitances charge up?</p>
+
+<p>The spec allows for 10µF on Vbus (Table 4-3: VBus Sink Characteristics) or equivalent. What that means exactly is not 100% clear, but most people take it to mean that the initial current spike above the max continuous current allowed, when integrated over time, should be no more than 50µC, which is what a 10µF capacitor will draw at 5V. So if we have a huge capacitor behind a regulator, that would count, too, unless our regulator is current-limiting.</p>
+
+<p>It does NOT mean we can’t have more capacitance than that. What that means is if we have more capacitance, we have to limit the inrush current so that they don’t appear as “naked” capacitance on Vbus (it may trigger overcurrent reset from the host). If we limit the charging speed of our capacitance to the max continuous current, we can have as much capacitance as we want.</p>
+
+<p>Fortunately, there are many chips (usually called USB Power Distribution Switches) that can handle this for us. For example, the Diodes Incorporated <a href="https://www.diodes.com/assets/Datasheets/AP2162_72.pdf">AP2162/2172</a>.</p>
+
+<h3 id="current-slew-rate">Current Slew Rate</h3>
+
+<p>This one is a bit harder to design for, and is probably more practically verified on the prototype rather than ensured by design. The maximum current slew rate (dI/dt) is 150mA/us, both on ramp up and down. This is the iLoadStepRate(max) in the spec, and the reason why it’s limited is because too much dI/dt can cause unacceptable Vbus voltage drop on the host due to inductance in the power supply path. If your design is exceeding this, it needs more capacitance (potentially requiring the use of a current-limiting switch, as described above).</p>
+
+<h3 id="suspend-mode">Suspend Mode</h3>
+
+<p>A compliant device must implement suspend mode. In short, if there is no traffic on the data bus for 3ms, the device has 7ms to enter suspend mode where it must draw no more than 2.5mA. This may be difficult to implement if you don’t do USB yourself, but for example, the Silicon Labs CP210x USB-UART chip has SUSPEND outputs for this purpose. The microcontroller can monitor it, and turn into go into sleep mode if/when it goes high.</p>
+
+<p>This requirement may be ignored if either CC indicates 1.5A/3.0A, or the host is a CDP/DCP port as detected through BCS.</p>
+
+<h2 id="pcb-design">PCB Design</h2>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-12-367x450.png" title="image-12-367x450" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-12-367x450.png" width="367" height="450" srcset="   /images/resized/wp-content/uploads/2021/04/image-12-367x450-250.png 250w, /images/wp-content/uploads/2021/04/image-12-367x450.png 367w" alt="PCB Design" loading="lazy">
+    </a>
+    <p class="image-caption">PCB Design
+</p>
+</div>
+
+<p>It depends on what connector you choose, but in my case it’s pretty simple. All the shorting does make it a bit more complicated, but still easily doable on 2 layers, which is a requirement for this project due to cost-sensitivity (most of my other projects are 4 layers now).</p>
+
+<p>For routing the data traces, standard rules apply (this is not specific to USB-C). They should be routed close together, with minimal vias and parallel runs of traces on another layer. Do we need impedance-controlled routing? Well, if you have a 4 layers board and you get free impedance control from your fab (like JLC), might as well do it. But whether that’s necessary or not depends on speed (edge rate) and trace length.</p>
+
+<p>The general rule of thumb is if the edge rate divided by signal travel time is smaller than 6, we need to think about treating it as a transmission line (with controlled impedance).</p>
+
+<p>USB minimum edge rates are 75ns for Low Speed, 20ns for Full Speed, and 500ps for High Speed. That gives us a maximum propagation time of 12.5ns, 3.33ns, and 83ps respectively. Velocity of propagation is ~0.6c, which gives us a maximum trace lengths of 2.2m, 60cm, and 1.49cm respectively, without having to worry about transmission line effects. In practice that means we don’t really need to worry unless we are doing High Speed (or we have very long traces).</p>
+
+<p>So what if we need controlled impedance? We have to calculate the trace width and spacing, based on the dielectric our fab is using. For example, <a href="https://cart.jlcpcb.com/impedanceCalculation?_ga=2.230527258.705169438.1590068961-649473211.1589804663">this is JLC’s calculator</a>. USB spec requires differential impedance to be 90Ω, which means that given a trace space of 5 mil (that’s a free parameter), we need 8.1 mil traces with the JLC7628 dielectric, or 5.17 mil traces with the JLC2313 dielectric. Using their standard stackup for 4 layers 1.6mm boards.</p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-13-1024x470.jpg" title="image-13-1024x470" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/image-13-1024x470.jpg" width="1024" height="470" srcset="   /images/resized/wp-content/uploads/2021/04/image-13-1024x470-518.jpg 518w,   /images/resized/wp-content/uploads/2021/04/image-13-1024x470-250.jpg 250w, /images/wp-content/uploads/2021/04/image-13-1024x470.jpg 1024w" alt="Impedance calculator" loading="lazy">
+    </a>
+    <p class="image-caption">Impedance calculator
+</p>
+</div>
+
+<p>Your result will be different depending on the fab, dielectric, and the stackup they use. There should always be a solid ground plane underneath the transmission line, and no other trace should be within 3x the width of the traces.</p>
+
+<p>CC lines are low speed, and you can do whatever you want with them (within reason…).</p>
+
+<p>Good luck with your designs and hope we will soon be in USB-C-opia!</p>
+
+<p>Discussions on Reddit: <a href="https://www.reddit.com/r/diyelectronics/comments/mlyedi/guide_to_designing_with_usbc/">https://www.reddit.com/r/diyelectronics/comments/mlyedi/guide_to_designing_with_usbc/</a></p>
+
+<!-- _includes/responsive_image.html -->
+
+<div class="image-wrapper">
+    <a href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/Untitled-1-450x337.jpg" title="Untitled-1-450x337" target="_blank" class="lightbox-image">
+        <img src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/Untitled-1-450x337.jpg" width="450" height="337" srcset="   /images/resized/wp-content/uploads/2021/04/Untitled-1-450x337-250.jpg 250w, /images/wp-content/uploads/2021/04/Untitled-1-450x337.jpg 450w" alt="" loading="lazy">
+    </a>
+    <p class="image-caption">
+</p>
+</div>
+
+
+  </div><a class="u-url" href="https://dubiouscreations.com/2021/04/06/designing-with-usb-c-lessons-learned/" hidden=""></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="https://dubiouscreations.com/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">Matthew Lai</li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>Proudly serving as a warning to others</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li>
+  <a rel="me" href="https://github.com/matthewlai" target="_blank" title="github">
+    <svg class="svg-icon grey">
+      <use xlink:href="/assets/minima-social-icons.svg#github"></use>
+    </svg>
+  </a>
+</li>
+</ul>
+</div>
+
+  </div>
+
+</footer>
+
+<script type="text/javascript" src="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/lightbox.js.download"></script>
+<link rel="stylesheet" href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/lightbox.css">
+<link rel="stylesheet" href="./Designing with USB-C_ Lessons Learned _ Dubious Creations_files/post_listing.css">
+
+
+
+<div id="lightbox"></div></body></html>
