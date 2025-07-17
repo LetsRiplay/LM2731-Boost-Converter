@@ -2618,7 +2618,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Keystone_5000-5004_Miniature"
+		(property "Footprint" "TestPoint:KEYSTONE_5000"
 			(at 180.34 71.12 0)
 			(effects
 				(font
@@ -2712,7 +2712,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Keystone_5000-5004_Miniature"
+		(property "Footprint" "TestPoint:KEYSTONE_5000"
 			(at 213.36 91.44 0)
 			(effects
 				(font
@@ -3144,7 +3144,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Keystone_5000-5004_Miniature"
+		(property "Footprint" "TestPoint:KEYSTONE_5000"
 			(at 144.78 72.39 0)
 			(effects
 				(font
@@ -3236,7 +3236,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric_Pad0.64x0.40mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 179.07 110.1852 0)
 			(effects
 				(font
@@ -3333,7 +3333,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Keystone_5000-5004_Miniature"
+		(property "Footprint" "TestPoint:KEYSTONE_5000"
 			(at 213.36 71.12 0)
 			(effects
 				(font
